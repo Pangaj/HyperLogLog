@@ -27,7 +27,7 @@
 
 
 
- The **HyperLogLog algorithm**, thoroughly described in [HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm](http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf)
+ **HyperLogLog algo**, thoroughly described in [HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm](http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf)
 - **Hashes each item** in the set to be analyzed, obtaining an associated ***32-bit binary number***
 - This value is then **decomposed in two parts**
   - The **first *"b"* bits** of this value are used to ***determine which bucket*** of the *estimator this number falls in out of the **N = 2<sup>b</sub>** ones available*,
