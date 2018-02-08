@@ -24,3 +24,14 @@
   - It is necessary to note that the **higher the "p"**, the ***more accurate the cardinality estimation***
 
 - By using a **minimal amount of memory** interms of KB, it can effectively represent **hundreds of millions of distinct elements**
+
+
+
+ The **HyperLogLog algorithm**, thoroughly described in [HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm](http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf)
+- **Hashes each item** in the set to be analyzed, obtaining an associated ***32-bit binary number***
+- This value is then **decomposed in two parts**
+  - The **first  bits** of this value are used to ***determine which bucket*** of the *estimator this number falls in out of the  ones available*,
+  - And in the *rest of the bits* --- **we count the amount of leading zeros** to ***estimate the probability of this number occurring***.
+- *Every estimator bucket*, stores the **maximum amount of leading zeros** found for all the values associated with that bucket
+- *After all the items processed this way*, the ***harmonic mean*** of the value for all the buckets is calculated
+- This value is then **multiplied by a constant & amount of buckets**
