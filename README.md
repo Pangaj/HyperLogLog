@@ -17,7 +17,7 @@
 </p>
 
  - where ***p*** is considered as a **parameter**  of HLL specifying the **desired accuracy**.
- - When one says **“HyperLogLog 16-bit”**, they mean that **p = 16**, making ***m = 2^16 = 65536***
+ - When one says **“HyperLogLog 16-bit”**, they mean that **p = 16**, making ***m = 2<sup>16</sup> = 65536***
  - Thus, by **controlling the value of p**, the **accuracy** of HLL's **cardinality estimation** ***can be tuned***
     - **Redis uses 14-bit HyperLogLog**
     - **AdRoll uses 18-bit HyperLogLog**
