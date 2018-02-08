@@ -30,8 +30,39 @@
  The **HyperLogLog algorithm**, thoroughly described in [HyperLogLog: the analysis of a near-optimal cardinality estimation algorithm](http://algo.inria.fr/flajolet/Publications/FlFuGaMe07.pdf)
 - **Hashes each item** in the set to be analyzed, obtaining an associated ***32-bit binary number***
 - This value is then **decomposed in two parts**
-  - The **first  bits** of this value are used to ***determine which bucket*** of the *estimator this number falls in out of the  ones available*,
+  - The **first *"b"* bits** of this value are used to ***determine which bucket*** of the *estimator this number falls in out of the **N = 2<sup>b</sub>** ones available*,
   - And in the *rest of the bits* --- **we count the amount of leading zeros** to ***estimate the probability of this number occurring***.
-- *Every estimator bucket*, stores the **maximum amount of leading zeros** found for all the values associated with that bucket
-- *After all the items processed this way*, the ***harmonic mean*** of the value for all the buckets is calculated
-- This value is then **multiplied by a constant & amount of buckets**
+- *Every estimator bucket **M<sub>j</sub>,0  ≤ j < 2<sup>b</sup>***, stores the **maximum amount of leading zeros** found for all the values associated with that bucket
+- *After all the items processed this way*, the ***harmonic mean*** of the value **2<sup>*M<sub>j</sub>*</sup>** for all the buckets is calculated, this mean value will **multiplied by a constant "Alpha" & amount of buckets "N"**, the obtained result is ***raw HyperLogLog estimate***, which can be expressed as
+
+<p align="center">
+  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/formula.png" alt="center">
+</p>
+
+&nbsp;
+
+<p align="center">
+  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/pseudocodeHLL.png" alt="center">
+**PseudoCode for HyperLogLog**
+</p>
+
+- This algo applied to **large data sets**, the data to process is found in an **input stream** that is ***processed by chunks***, which are groups of consecutive data taken from the stream, in the main loop of the algorithm
+- The **innermost loop** takes care of the processing of each item in the current chunk.
+  - Each item is **first hashed**
+  - The **resulting value is split into two pieces**
+    - The **1st part of binary no.** that represents the **index of the estimator array** For ex., when using **256 buckets**, the index field corresponds to the 8 less significant bits of the hash, and the value 00010011 is the bucket number 35
+    - The **rest of the bit stream** is *given to a function* that **counts the leading zeros** and then the associated bucket is updated with this value if it is larger than the current value in the bucket. When the process finishes
+
+&nbsp;
+
+<p align="center">
+  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/sequential.png" alt="center">
+**Sequential implementation of the HyperLogLog algorithm**
+</p>
+
+## Conclusion
+- This algorithm helps estimate the **cardinality**
+- Beside HyperLogLog, we have other Probabilistic Data Structure such as **Count-Min Sketch** for estimating frequencies, **Bloom Filter** for membership checking, etc. Thus, *use the right data structure for the right purpose*.
+
+
+- **Counting millions of distinct elements is a strength of HyperLogLog**, But if we have **few thousands of elements?** In this case, **maybe a simple Java HashSet or ArrayList** can be enough
