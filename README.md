@@ -43,7 +43,7 @@
 
 <p align="center">
   <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/pseudocodeHLL.png" alt="center">
-**PseudoCode for HyperLogLog**
+<strong>PseudoCode for HyperLogLog</strong>
 </p>
 
 - This algo applied to **large data sets**, the data to process is found in an **input stream** that is ***processed by chunks***, which are groups of consecutive data taken from the stream, in the main loop of the algorithm
@@ -57,12 +57,7 @@
 
 <p align="center">
   <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/sequential.png" alt="center">
-**Sequential implementation of the HyperLogLog algorithm**
-</p>
-
-<p align="center">
-  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/sequential.png" alt="center">
-**Sequential implementation of the HyperLogLog algorithm**
+<strong>Sequential implementation of the HyperLogLog algorithm</strong>
 </p>
 
 ## Conclusion
