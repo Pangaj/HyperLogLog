@@ -10,3 +10,7 @@
 
 - It's a **space-efficient algos. for accurate cardinality estimations**
 - Redis’s implementation of HLL uses at most 12Kb of memory to estimate the cardinality of practically any set
+
+<p align="center">
+![HyperLogLog Formula](https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/hllFormula.png)
+</p>
