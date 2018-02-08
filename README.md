@@ -60,6 +60,11 @@
 **Sequential implementation of the HyperLogLog algorithm**
 </p>
 
+<p align="center">
+  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/sequential.png" alt="center">
+**Sequential implementation of the HyperLogLog algorithm**
+</p>
+
 ## Conclusion
 - This algorithm helps estimate the **cardinality**
 - Beside HyperLogLog, we have other Probabilistic Data Structure such as **Count-Min Sketch** for estimating frequencies, **Bloom Filter** for membership checking, etc. Thus, *use the right data structure for the right purpose*.
