@@ -12,5 +12,5 @@
 - Redis’s implementation of HLL uses at most 12Kb of memory to estimate the cardinality of practically any set
 
 <p align="center">
-![HyperLogLog Formula](https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/hllFormula.png)
+  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/hllFormula.png" alt="center">
 </p>
