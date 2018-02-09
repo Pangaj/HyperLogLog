@@ -42,7 +42,7 @@
 &nbsp;
 
 <p align="center">
-  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/pseudocodeHLL.png" alt="center">
+  <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/pseudo.png" alt="center">
 <strong>PseudoCode for HyperLogLog</strong>
 </p>
 
