@@ -62,9 +62,9 @@
 </p>
 
 ## Programs
-- OneMillionRecord
+- **OneMillionRecord**
   - A sample java program to display **how to fetch data from .csv file** which contains data set for quering purpose
-- AddOneMillionInForHyperLogLog
+- **AddOneMillionInForHyperLogLog**
   - There are **3 .csv data set files** which is used as **i/o for HyperLogLog to find cardinality**
   - There 3 file **all together may contains some duplicates data sets**. So we also **find the cardinality of 3 files** using ***PFMerge*** function
 
