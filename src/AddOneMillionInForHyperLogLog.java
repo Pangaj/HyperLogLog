@@ -10,14 +10,13 @@ public class AddOneMillionInForHyperLogLog {
         String dataFileOne = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile1.csv";
         String dataFileTwo = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile2.csv";
         String dataFileThree = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile3.csv";
-        String dataFileFour = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/bookFile4.csv";
         String hyperLogLogOne = "hyperLogLogOne";
         String hyperLogLogTwo = "hyperLogLogTwo";
         String hyperLogLogThree = "hyperLogLogThree";
-        String hyperLogLogFour = "hyperLogLogFour";
         String hyperLogLogMerge = "hyperLogLogMerge";
         long startTime, endTime;
         float totalTime, timeInSecs;
+        int totalCount;
 
         BufferedReader bufferedReader = null;
         String line;
@@ -29,6 +28,7 @@ public class AddOneMillionInForHyperLogLog {
         jedis.del(hyperLogLogTwo);
         jedis.del(hyperLogLogMerge);
 
+        totalCount = 0;
         startTime = new Date().getTime();
         try {
             bufferedReader = new BufferedReader(new FileReader(dataFileOne));
@@ -36,6 +36,7 @@ public class AddOneMillionInForHyperLogLog {
                 // separate using comma - we need only url which is present @ 2nd data. so we are using [1] for split function
                 String url = line.split(splitKey)[1];
                 jedis.pfadd(hyperLogLogOne, url);
+                totalCount++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -48,13 +49,15 @@ public class AddOneMillionInForHyperLogLog {
                 }
             }
         }
-        System.out.println("hyperLogLogOne : " + jedis.pfcount(hyperLogLogOne));
+        System.out.println("HyperLogLogOne Total : " + totalCount);
+        System.out.println("HyperLogLogOne PFCount : " + jedis.pfcount(hyperLogLogOne));
         endTime = new Date().getTime();
         totalTime = endTime - startTime;
         timeInSecs = totalTime / 1000;
         System.out.println("Total time : " + timeInSecs + " secs, or : " + totalTime + " mSecs");
         System.out.println();
 
+        totalCount = 0;
         startTime = new Date().getTime();
         try {
             bufferedReader = new BufferedReader(new FileReader(dataFileTwo));
@@ -62,6 +65,7 @@ public class AddOneMillionInForHyperLogLog {
                 // separate using comma - we need only url which is present @ 2nd data. so we are using [1] for split function
                 String url = line.split(splitKey)[1];
                 jedis.pfadd(hyperLogLogTwo, url);
+                totalCount++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,13 +78,15 @@ public class AddOneMillionInForHyperLogLog {
                 }
             }
         }
-        System.out.println("hyperLogLogTwo : " + jedis.pfcount(hyperLogLogTwo));
+        System.out.println("HyperLogLogTwo Total : " + totalCount);
+        System.out.println("HyperLogLogTwo PFCount : " + jedis.pfcount(hyperLogLogTwo));
         endTime = new Date().getTime();
         totalTime = endTime - startTime;
         timeInSecs = totalTime / 1000;
         System.out.println("Total time : " + timeInSecs + " secs, or : " + totalTime + " mSecs");
         System.out.println();
 
+        totalCount = 0;
         startTime = new Date().getTime();
         try {
             bufferedReader = new BufferedReader(new FileReader(dataFileThree));
@@ -88,6 +94,7 @@ public class AddOneMillionInForHyperLogLog {
                 // separate using comma - we need only url which is present @ 2nd data. so we are using [1] for split function
                 String url = line.split(splitKey)[1];
                 jedis.pfadd(hyperLogLogThree, url);
+                totalCount++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,40 +107,15 @@ public class AddOneMillionInForHyperLogLog {
                 }
             }
         }
-        System.out.println("hyperLogLogThree : " + jedis.pfcount(hyperLogLogThree));
+        System.out.println("HyperLogLogThree Total : " + totalCount);
+        System.out.println("HyperLogLogThree PFCount : " + jedis.pfcount(hyperLogLogThree));
         endTime = new Date().getTime();
         totalTime = endTime - startTime;
         timeInSecs = totalTime / 1000;
         System.out.println("Total time : " + timeInSecs + " secs, or : " + totalTime + " mSecs");
         System.out.println();
 
-        startTime = new Date().getTime();
-        try {
-            bufferedReader = new BufferedReader(new FileReader(dataFileFour));
-            while ((line = bufferedReader.readLine()) != null) {
-                // separate using comma - we need only url which is present @ 2nd data. so we are using [1] for split function
-                String url = line.split(splitKey)[1];
-                jedis.pfadd(hyperLogLogFour, url);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        System.out.println("hyperLogLogFour : " + jedis.pfcount(hyperLogLogFour));
-        endTime = new Date().getTime();
-        totalTime = endTime - startTime;
-        timeInSecs = totalTime / 1000;
-        System.out.println("Total time : " + timeInSecs + " secs, or : " + totalTime + " mSecs");
-        System.out.println();
-
-        jedis.pfmerge(hyperLogLogMerge, hyperLogLogOne, hyperLogLogTwo, hyperLogLogThree, hyperLogLogFour);
-        System.out.println("hyperLogLogMerge : " + jedis.pfcount(hyperLogLogMerge));
+        jedis.pfmerge(hyperLogLogMerge, hyperLogLogOne, hyperLogLogTwo, hyperLogLogThree);
+        System.out.println("HyperLogLogMerge : " + jedis.pfcount(hyperLogLogMerge));
     }
 }
