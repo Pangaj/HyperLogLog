@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class AddOneMillionInForHyperLogLog {
     public static void main(String[] args) {
+        // TODO: 9/2/18 Before Build the file, Please update your current file location here
         String dataFileOne = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile1.csv";
         String dataFileTwo = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile2.csv";
         String dataFileThree = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile3.csv";
