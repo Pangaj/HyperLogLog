@@ -7,12 +7,14 @@ import java.util.Date;
 
 public class AddOneMillionInForHyperLogLog {
     public static void main(String[] args) {
-        String dataFileOne = "/home/local/ZOHOCORP/pangaj-6204/Downloads/top1-1m.csv";
-        String dataFileTwo = "/home/local/ZOHOCORP/pangaj-6204/Downloads/top2-1m.csv";
-        String dataFileThree = "/home/local/ZOHOCORP/pangaj-6204/Downloads/majestic_million.csv";
+        String dataFileOne = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile1.csv";
+        String dataFileTwo = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile2.csv";
+        String dataFileThree = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/urlFile3.csv";
+        String dataFileFour = "/home/local/ZOHOCORP/pangaj-6204/Documents/JavaGit/Redis/HyperLogLog/DataFiles/bookFile4.csv";
         String hyperLogLogOne = "hyperLogLogOne";
         String hyperLogLogTwo = "hyperLogLogTwo";
         String hyperLogLogThree = "hyperLogLogThree";
+        String hyperLogLogFour = "hyperLogLogFour";
         String hyperLogLogMerge = "hyperLogLogMerge";
         long startTime, endTime;
         float totalTime, timeInSecs;
@@ -105,7 +107,33 @@ public class AddOneMillionInForHyperLogLog {
         System.out.println("Total time : " + timeInSecs + " secs, or : " + totalTime + " mSecs");
         System.out.println();
 
-        jedis.pfmerge(hyperLogLogMerge, hyperLogLogOne, hyperLogLogTwo, hyperLogLogThree);
+        startTime = new Date().getTime();
+        try {
+            bufferedReader = new BufferedReader(new FileReader(dataFileFour));
+            while ((line = bufferedReader.readLine()) != null) {
+                // separate using comma - we need only url which is present @ 2nd data. so we are using [1] for split function
+                String url = line.split(splitKey)[1];
+                jedis.pfadd(hyperLogLogFour, url);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println("hyperLogLogFour : " + jedis.pfcount(hyperLogLogFour));
+        endTime = new Date().getTime();
+        totalTime = endTime - startTime;
+        timeInSecs = totalTime / 1000;
+        System.out.println("Total time : " + timeInSecs + " secs, or : " + totalTime + " mSecs");
+        System.out.println();
+
+        jedis.pfmerge(hyperLogLogMerge, hyperLogLogOne, hyperLogLogTwo, hyperLogLogThree, hyperLogLogFour);
         System.out.println("hyperLogLogMerge : " + jedis.pfcount(hyperLogLogMerge));
     }
 }
