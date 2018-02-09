@@ -43,6 +43,7 @@
 
 <p align="center">
   <img align="" src="https://raw.githubusercontent.com/Pangaj/HyperLogLog/master/pictures/pseudo.png" alt="center">
+  <br>
 <strong>PseudoCode for HyperLogLog</strong>
 </p>
 
