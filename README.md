@@ -61,6 +61,26 @@
 <strong>Sequential implementation of the HyperLogLog algorithm</strong>
 </p>
 
+## Programs
+- OneMillionRecord
+  - A sample java program to display **how to fetch data from .csv file** which contains data set for quering purpose
+- AddOneMillionInForHyperLogLog
+  - There are **3 .csv data set files** which is used as **i/o for HyperLogLog to find cardinality**
+  - There 3 file **all together may contains some duplicates data sets**. So we also **find the cardinality of 3 files** using ***PFMerge*** function
+
+
+
+| FileName (csv files)| Total DataSet Count| PFCount (cardinality)|TimeTaken (Secs)| Standard Error (SE)|
+| :------------------:| :-----------------:| :------------------: | :-------------:| :-----------------:|
+|      urlFile1       |      1000000       |         998314       |     16.038     |     **0.1686**     |
+|      urlFile2       |      1000000       |        1003824       |     13.818     |   **0.380943273**  |
+|      urlFile3       |      1000001       |         998146       |     14.434     |     **0.1854**     |
+
+**cardinality of all 3 data sets using PFMerge function = 2583900**
+
+*Note : Those 3 data sets may contains some common url sites*
+
+
 ## Conclusion
 - This algorithm helps estimate the **cardinality**
 - Beside HyperLogLog, we have other Probabilistic Data Structure such as **Count-Min Sketch** for estimating frequencies, **Bloom Filter** for membership checking, etc. Thus, *use the right data structure for the right purpose*.
